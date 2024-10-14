@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  backend:
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: 'python main.py'
+    ports:
+      - 8001:5000
+    volumes:
+      - .:/app
+    tty: true
+    depends_on:
+      - db
+
+  queue:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: 'python consumer.py'
+    depends_on:
+      - db
+      
+  db:
+    image: mysql:5.7.22
+    restart: always
+    environment:
+      MYSQL_DATABASE: main
+      MYSQL_USER: main
+      MYSQL_PASSWORD: Main@1234
+      MYSQL_ROOT_PASSWORD: Root@1234
+    volumes:
+      - .dbdata:/var/lib/mysql
+    ports:
+      - 33067:3306
