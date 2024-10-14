@@ -1,4 +1,4 @@
-# Event Driven Microservice Application
+# Microservice Event Driven Application
 
 This demo application showcases an event driven system built using a microservices architecture. It features two backend services: one for admin management, developed with the Django framework, and another for user interactions, built with Flask. The frontend is developed using React with TypeScript. Each backend service is connected to its own MySQL database, and RabbitMQ is used to orchestrate events and enable communication between services. The entire application is deployed in Docker containers, ensuring easy setup and consistent environments across different systems.
 
